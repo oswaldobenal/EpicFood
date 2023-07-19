@@ -7,9 +7,9 @@ public partial class Estado
 {
     public int EstId { get; set; }
 
-    public string? EstNombre { get; set; }
+    public string EstNombre { get; set; }
 
-    public string? EstValor { get; set; }
+    public string EstValor { get; set; }
 
     public virtual ICollection<Combo> Combos { get; set; } = new List<Combo>();
 

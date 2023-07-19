@@ -9,9 +9,9 @@ public partial class Prod
 
     public int? EstId { get; set; }
 
-    public string? ProProducto { get; set; }
+    public string ProProducto { get; set; }
 
-    public string? ProDescripcionProducto { get; set; }
+    public string ProDescripcionProducto { get; set; }
 
     public double? ProPrecio { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Prod
 
     public virtual ICollection<Combo> ComboPros { get; set; } = new List<Combo>();
 
-    public virtual Estado? Est { get; set; }
+    public virtual Estado Est { get; set; }
 }
