@@ -13,9 +13,9 @@ public partial class Combo
 
     public int? ProProId { get; set; }
 
-    public string? ComNombre { get; set; }
+    public string ComNombre { get; set; }
 
-    public string? ComDescripcion { get; set; }
+    public string ComDescripcion { get; set; }
 
     public double? ComPrecio { get; set; }
 
@@ -25,9 +25,9 @@ public partial class Combo
 
     public virtual ICollection<CabeceraFactura> CabeceraFacturas { get; set; } = new List<CabeceraFactura>();
 
-    public virtual Estado? Est { get; set; }
+    public virtual Estado Est { get; set; }
 
-    public virtual Prod? Pro { get; set; }
+    public virtual Prod Pro { get; set; }
 
-    public virtual Prod? ProPro { get; set; }
+    public virtual Prod ProPro { get; set; }
 }

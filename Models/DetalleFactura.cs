@@ -13,5 +13,5 @@ public partial class DetalleFactura
 
     public double? DetSubtotal { get; set; }
 
-    public virtual CabeceraFactura? Cabecera { get; set; }
+    public virtual CabeceraFactura Cabecera { get; set; }
 }

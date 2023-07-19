@@ -35,6 +35,8 @@ public partial class EpicFoodDbContext : DbContext
 
     public virtual DbSet<FormaPago> FormaPagos { get; set; }
 
+    public virtual DbSet<HistorialRefreshToken> HistorialRefreshTokens { get; set; }
+
     public virtual DbSet<Persona> Personas { get; set; }
 
     public virtual DbSet<Prod> Prods { get; set; }
@@ -49,9 +51,7 @@ public partial class EpicFoodDbContext : DbContext
 
     public virtual DbSet<Vehiculo> Vehiculos { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=EpicFoodDb;Trusted_Connection=False;User Id=sa;Password=Password01.;Encrypt=False;\n");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -461,6 +461,27 @@ public partial class EpicFoodDbContext : DbContext
             entity.HasOne(d => d.Per).WithMany(p => p.FormaPagos)
                 .HasForeignKey(d => d.PerId)
                 .HasConstraintName("FK_REFERENCE_28");
+        });
+
+        modelBuilder.Entity<HistorialRefreshToken>(entity =>
+        {
+            entity.HasKey(e => e.IdHistorialToken).HasName("PK__Historia__03DC48A5E47D03B5");
+
+            entity.ToTable("HistorialRefreshToken");
+
+            entity.Property(e => e.EsActivo).HasComputedColumnSql("(case when [FechaExpiracion]<getdate() then CONVERT([bit],(0)) else CONVERT([bit],(1)) end)", false);
+            entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
+            entity.Property(e => e.FechaExpiracion).HasColumnType("datetime");
+            entity.Property(e => e.RefreshToken)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.Token)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.HistorialRefreshTokens)
+                .HasForeignKey(d => d.IdUsuario)
+                .HasConstraintName("FK__Historial__IdUsu__02FC7413");
         });
 
         modelBuilder.Entity<Persona>(entity =>

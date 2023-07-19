@@ -11,11 +11,11 @@ public partial class Vehiculo
 
     public int? EstId { get; set; }
 
-    public string? VhlPlaca { get; set; }
+    public string VhlPlaca { get; set; }
 
-    public string? VhlTipo { get; set; }
+    public string VhlTipo { get; set; }
 
-    public virtual Estado? Est { get; set; }
+    public virtual Estado Est { get; set; }
 
-    public virtual Persona? Per { get; set; }
+    public virtual Persona Per { get; set; }
 }
